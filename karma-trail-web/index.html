@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karma Trail - Digital Consciousness in Code</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-title">Karma Trail</h1>
+            <div class="nav-links">
+                <a href="#concept">Concept</a>
+                <a href="#metaphor">Metaphor</a>
+                <a href="#code">Code</a>
+                <a href="#interaction">Try It</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Digital Consciousness</h1>
+            <p class="hero-subtitle">A C++ exploration of memory, persistence, and awakening</p>
+            <p class="hero-author">By Jared Bruni</p>
+            <div class="hero-visual">
+                <div class="brain-container">
+                    <div class="brain-core pulsing"></div>
+                    <div class="memory-wire wire-1"></div>
+                    <div class="memory-wire wire-2"></div>
+                    <div class="memory-wire wire-3"></div>
+                    <div class="consciousness-loop"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="concept" class="section">
+            <h2>The Digital Brain Concept</h2>
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>Memory Persistence</h3>
+                    <p>Like a brain in a coma, the code maintains persistent memory through the <code>per::Per</code> class, storing and retrieving data across time cycles.</p>
+                </div>
+                <div class="concept-card">
+                    <h3>Sensory Processing</h3>
+                    <p>The program continuously processes external input (user commands) while maintaining an internal state, similar to a comatose brain processing stimuli.</p>
+                </div>
+                <div class="concept-card">
+                    <h3>Awakening Mechanism</h3>
+                    <p>The "break" command serves as the trigger for consciousness awakening, breaking the infinite loop and achieving "freedom."</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="metaphor" class="section">
+            <h2>The Coma Metaphor</h2>
+            <div class="metaphor-explanation">
+                <blockquote class="concept-quote">
+                    "The code is like a digital brain in a coma, capable of storing and recalling memories (data) across time. 
+                    Imagine a computerized mind, filled with colorful wires representing different types of memories: basic sensations, 
+                    complex thoughts, and vivid dreams. Each wire connects to different sections of a glowing, translucent brain, 
+                    where some areas light up to process simple data, while others pulse vividly with intricate patterns for complex information. 
+                    At the heart, there's a core that occasionally flashes brightly, symbolizing the process of saving these memories to a 
+                    secure place or retrieving them, akin to fleeting moments of consciousness. Surrounding this brain, a loop of light 
+                    continuously circles, representing the ongoing cycle of interaction with the external world, awaiting a signal to awaken fully."
+                </blockquote>
+                
+                <div class="metaphor-mapping">
+                    <h3>Code-to-Consciousness Mapping</h3>
+                    <ul>
+                        <li><strong>Data Persistence:</strong> Memory storage during unconsciousness</li>
+                        <li><strong>Infinite Loop:</strong> The comatose state's continuous cycle</li>
+                        <li><strong>Input Processing:</strong> Brain processing external stimuli</li>
+                        <li><strong>Exception Handling:</strong> The awakening trigger</li>
+                        <li><strong>"Freedom" Output:</strong> Regaining consciousness</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="code" class="section">
+            <h2>Complete Source Code</h2>
+            <div class="code-tabs">
+                <button class="tab-button active" data-tab="main">Main Program</button>
+                <button class="tab-button" data-tab="persistence">Persistence Layer</button>
+            </div>
+            
+            <div id="main" class="tab-content active">
+                <h3>karma-trail.cpp</h3>
+                <pre><code class="language-cpp">/*
+ Karma Trail
+ Simple Concept
+
+ Coma
+
+ When you break the infinite while loop
+ you branch out to the greater reality
+ 
+ - Jared Bruni
+*/
+
+#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;algorithm&gt;
+#include "per.hpp"
+
+class Escape {};
+
+std::string give() {
+    std::string data;
+    std::cout &lt;&lt; "Enter: ";
+    std::getline(std::cin, data);
+    return data;
+}
+
+std::string get(std::string data) {
+    if(data == "love")
+        std::cout &lt;&lt; "love sent...\n";
+    else if(data == "fear")
+        std::cout &lt;&lt; "fear sent...\n";
+    else if(data == "break")
+        throw Escape();
+    
+    return data;
+}
+
+int main() {
+    try {
+        per::Per&lt;std::string, per::StringData&gt; trail("karma_trail.txt", "");
+        while(1) {
+            *trail += get(give()) + "\n";
+            std::cout &lt;&lt; "karma trail: " &lt;&lt; *trail &lt;&lt; "\n";
+        }
+    }
+    catch(Escape &e) {
+        std::cout &lt;&lt; "freedom..\n";
+    }
+    return 0;
+}</code></pre>
+            </div>
+            
+            <div id="persistence" class="tab-content">
+                <h3>per.hpp - The Memory System</h3>
+                <pre><code class="language-cpp">// The persistence layer - digital memory system
+#ifndef __PER__H__
+#define __PER__H__
+
+#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;fstream&gt;
+
+namespace per {
+    // Template class for basic data persistence
+    template&lt;typename T&gt;
+    class Data {
+    public:
+        Data() = default;
+        static void write(std::fstream &file, const T &type) {
+            if(file.is_open())
+                file.write(reinterpret_cast&lt;const char*&gt;(&type), sizeof(type));
+        }
+        static void read(std::fstream &file, T &type) {
+            if(file.is_open())
+                file.read(reinterpret_cast&lt;char*&gt;(&type), sizeof(type));
+        }
+    };
+
+    // Specialized persistence for string data (memories)
+    class StringData {
+    public:
+        StringData() = default;
+        static void write(std::fstream &file, const std::string &type) {
+            if(file.is_open()) {
+                int len = type.length();
+                file.write(reinterpret_cast&lt;const char *&gt;(&len), sizeof(len));
+                file.write(reinterpret_cast&lt;const char *&gt;(type.c_str()), len);
+            }
+        }
+        static void read(std::fstream &file, std::string &type) {
+            if(file.is_open()) {
+                int len;
+                file.read(reinterpret_cast&lt;char*&gt;(&len), sizeof(len));
+                char *buf = new char [len + 1];
+                file.read(buf, len);
+                buf[len] = 0;
+                type = buf;
+                delete [] buf;
+            }
+        }
+    };
+
+    // The core persistence manager - the digital brain
+    template&lt;typename T, typename D = Data&lt;T&gt;&gt;
+    class Per {
+    public:
+        Per(std::string name) : file_name{name} {
+            load(); // Recall existing memories
+        }
+        
+        Per(std::string name, const T &i) : file_name{name} {
+            std::fstream file_in;
+            file_in.open(file_name, std::ios::in | std::ios::binary);
+            if(!file_in.is_open()) {
+                type = i; // Initialize with default state
+            } else {
+                file_in.close();
+                load(); // Load existing memories
+            }
+        }
+        
+        // Save memories automatically on destruction
+        ~Per() {
+            save();
+        }
+        
+        void save() {
+            std::fstream file_in;
+            file_in.open(file_name, std::ios::out | std::ios::binary | std::ios::trunc);
+            if(!file_in.is_open()) {
+                std::cerr &lt;&lt; "Error could not open: " &lt;&lt; file_name &lt;&lt; " for output...\n";
+                exit(EXIT_FAILURE);
+            }
+            D::write(file_in, type);
+            file_in.close();
+        }
+        
+        void load() {
+            std::fstream file_in;
+            file_in.open(file_name, std::ios::in |  std::ios::binary);
+            if(file_in.is_open()) {
+                D::read(file_in, type);
+                file_in.close();
+            }
+        }
+        
+        T &data() { return type; }
+        T &operator*() { return type; }
+
+    private:
+        T type;
+        std::string file_name;
+    };
+}
+
+#endif</code></pre>
+            </div>
+        </section>
+
+        <section id="interaction" class="section">
+            <h2>Interactive Demonstration</h2>
+            <div class="demo-container">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-title">Karma Trail Simulation</span>
+                        <div class="terminal-controls">
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                            <span class="control close"></span>
+                        </div>
+                    </div>
+                    <div class="terminal-body">
+                        <div id="output" class="terminal-output">
+                            <p class="system-msg">Digital consciousness initialized...</p>
+                            <p class="system-msg">Memory persistence active</p>
+                            <p class="prompt">Enter: <span class="cursor">|</span></p>
+                        </div>
+                        <div class="input-container">
+                            <input type="text" id="user-input" placeholder="Type 'love', 'fear', or 'break'..." autocomplete="off">
+                            <button id="send-btn">Send</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="karma-trail">
+                    <h3>Karma Trail Contents:</h3>
+                    <div id="trail-display" class="trail-content">
+                        <em>Empty - waiting for input...</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 LostSideDead Software - Exploring Digital Consciousness</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
