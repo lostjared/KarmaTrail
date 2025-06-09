@@ -1,2 +1,3 @@
 # KarmaTrail
-Description of a coma
+
+A C++ exploration of memory, persistence, and awakening
